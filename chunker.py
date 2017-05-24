@@ -14,7 +14,7 @@ def count_words(text_dir):
 		tokens = word_tokenize(text)
 		words = [word for word in filter(lambda s: not punct.match(s), tokens)]
 		print(file.strip() + " " + str(len(tokens)) + " " + str(len(words)) + "\n")
-
+	return 
 
 def chunk_text(text, size, with_punct):
 	if with_punct:
@@ -43,21 +43,17 @@ def chunk_text(text, size, with_punct):
 	if current_size >= size:
 		chunks.append(current_chunk)
 	return chunks
-	
-if __name__ == "__main__":
-	#count_words(sys.argv[1])
-	#print(chunk_text("Hello. It's me. Please chunk me into pieces.",int(sys.argv[1])))
-	files = open("filenames.txt", "r").readlines()
-	
+
+def chunk_all(size, with_punct):
 	chunks_for_file = []
 	chunks_for_file_original = [78,183,383,377,203,167,92,126,156,103,164,261,127,183,173,140,106,68,67]
 	
-	for file in files:
-		text = open("../data/short_books/" + file.strip()).read().replace("\n"," ").replace("\r"," ").decode('utf-8')[1]
+	for i in range(1,20):
+		text = open("../data/id_texts/%02d.txt"%i).read().replace("\n"," ").replace("\r"," ").decode('utf-8')[1:]
 		
 		#print(file.strip())
 		
-		chunked = chunk_text(text,int(sys.argv[1]),int(sys.argv[2]))
+		chunked = chunk_text(text, size, with_punct)
 		num = len(chunked)
 		chunks_for_file.append(num)
 		
@@ -73,5 +69,18 @@ if __name__ == "__main__":
 	avg = 0
 	for v1,v2 in zip(chunks_for_file,chunks_for_file_original):
 		avg += abs(v1-v2)
-	print("Chunk size: %d. Average deviation: %d"%(int(sys.argv[1]), avg//len(chunks_for_file)))
-		
+	print("Chunk size: %d. Average deviation: %d"%(size, avg//len(chunks_for_file)))
+	return 
+
+if __name__ == "__main__":
+	#count_words(sys.argv[1])
+	#print(chunk_text("Hello. It's me. Please chunk me into pieces.",int(sys.argv[1])))
+	
+	chunk_all(int(sys.argv[1]), int(sys.argv[2]))
+
+	"""
+	textid = int(sys.argv[1])
+	text = open("%02d"%textid).read().replace("\n"," ").replace("\r"," ").decode('utf-8')[1:]
+	chunks = chunk_text(text, 1000, 0)
+	print (len(chunks))	
+	"""
