@@ -58,7 +58,7 @@ def chunk_all(size, with_punct):
 	chunks_for_file_exp = [62,165,343,340,173,158,81,109,138,94,148,196,112,146,149,114,93,60,62]
 	
 	for i in range(1,20):
-		text = open("../data/id_texts/%02d.txt"%i).read()
+		text = open("../data/id_texts/manual_remove/%02d.txt"%i).read()
 		
 		#print(file.strip())
 		
@@ -85,12 +85,11 @@ def chunk_all(size, with_punct):
 if __name__ == "__main__":
 	#count_words(sys.argv[1])
 	#print(chunk_text("Hello. It's me. Please chunk me into pieces.",int(sys.argv[1])))
-	"""
-	chunk_all(int(sys.argv[1]), int(sys.argv[2]))
-	
-	"""
-	textid = int(sys.argv[1])
-	text = open("%02d"%textid).read()
-	chunks = chunk_text(text, 1000, 0)
-	print (len(chunks))	
+	if sys.argv[1] == "all":
+		chunk_all(int(sys.argv[2]), int(sys.argv[3]))
+	else:
+		textid = int(sys.argv[1])
+		text = open("../data/id_texts/manual_remove/%02d.txt"%textid).read()
+		chunks = chunk_text(text, 1000, 0)
+		print (len(chunks))	
 	
