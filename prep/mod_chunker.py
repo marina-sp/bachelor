@@ -15,24 +15,16 @@ from preprocesser import Preprocesser as P
 punct = re.compile("[,\.:;\"\?!\[\]\(\)-\*]+")
 
 def build_paras(text, tokenize_function):
-	# use nltk for sentence and word splitting
-	if isinstance(text, unicode):
-		pass
-		#print("unicode input!")
+	# builds paragrahps from a text 
+	# splits to sentences using nltk
+	# splits to words using given function 
+
 	paras = filter(lambda p: re.search("\w+",p), text.encode('utf-8').split("\n\n"))
-	for para in paras:
-		if isinstance(para, unicode):
-			pass
-			#print("oh no, unicode again!!")
 	tp = []
 	for para in paras:
 		sents = [sent.replace("\n"," ").strip() for sent in sent_tokenize(para)]
-		#print(sents)
 		tok_sents = [tokenize_function(sent) for sent in sents]	
 		tp.append(tok_sents)
-		
-	#tokenized_paragraphs = map(lambda paragraph: [tokenize_function(sent) for sent in sent_tokenize(paragraph)], paragraphs)
-	#print(tp[0][0])	
 	return tp
 
 def build_paras_with_rst(filename, tokenize_function):
@@ -52,10 +44,10 @@ def build_paras_with_rst(filename, tokenize_function):
 			current_para = []
 	return paragraphs
 	
-	
 
 def chunk(paragraphs, size, no_par_breaks):
-	#print(len(paragraphs), size, no_par_breaks)
+	# splits paragraphs into chunks of given size
+	# split on sents or on paragraphs
 	current_size = 0
 	current_chunk = []
 	chunks = []
@@ -67,10 +59,8 @@ def chunk(paragraphs, size, no_par_breaks):
 		units = [sent for para in paragraphs for sent in para]
 		size_of = len
 		merge = lambda chunk, sent: chunk + [sent]
-	#print(units[:5])
 	for unit in units:
 		unit_size = size_of(unit)
-		#print(unit_size)
 		if current_size < size: 
 			current_size += unit_size
 			current_chunk = merge(current_chunk,unit)
@@ -79,7 +69,6 @@ def chunk(paragraphs, size, no_par_breaks):
 			current_chunk = []
 			current_chunk = merge(current_chunk, unit)
 			current_size = unit_size
-		#print(current_chunk[:5])
 
 	# take the last chunk 
 	if (current_size >= 1000)and(current_size >= size):
@@ -106,11 +95,8 @@ def chunk_one(fileid, size, tokenizer, no_par_breaks, rst, mydir = "../../data/i
 	else:
 		text = codecs.open(mydir + "%02d.txt"%fileid,"r","utf-8").read()[3:]	
 		paras = build_paras(text, split_words)
-	#print(paras[:2])
 	chunks = chunk(paras, size, no_par_breaks)
-	#print(len(chunks))
 	return chunks
-
 
 
 def chunk_all(size, tokenizer, no_par_breaks, rst, print_long = False):
@@ -136,7 +122,9 @@ def chunk_all(size, tokenizer, no_par_breaks, rst, print_long = False):
 		print("Chunk size: %d. Tokenizer: %s. No para breaks: %r. RST parser: %r. \nAverage deviation from new dateset: %.2f.\nAverage deviation from old dataset: %.2f.\n"%(size, tokenizer, no_par_breaks, rst, avg, avg1))
 	return
 
+
 def split_in_chap(fileid):
+	# splits file to chapters
 	text = codecs.open("../../data/id_texts/ascii_texts/chapters/%02d/CH%02d.txt"%(fileid,fileid),"r","utf-8").read()	
 	chaps = text.split("CHAPTER")
 	for i,chap in enumerate(chaps):
@@ -144,21 +132,18 @@ def split_in_chap(fileid):
 		out.write(chap)
 	return len(chaps)
 
-if __name__ == "__main__":
-	# EXAMPLE: python chunker.py all SIZE TOKENIZER NO_PAR_BREAKS RST
 
-	#count_words(sys.argv[1])
-	#print(chunk_text("Hello. It's me. Please chunk me into pieces.",int(sys.argv[1])))
+if __name__ == "__main__":
+
+	# EXAMPLE: python chunker.py all SIZE TOKENIZER NO_PAR_BREAKS RST
 	if sys.argv[1] == "all":
-		#chunk_all(int(sys.argv[2]), bool(int(sys.argv[3])))
 		chunk_all(int(sys.argv[2]), sys.argv[3], bool(int(sys.argv[4]))	, bool(int(sys.argv[5])), True)
-		
+
+	# EXAMPLE: python chunker.py one FILEID SIZE TOKENIZER NO_PAR_BREAKS RST	
 	elif sys.argv[1] == "one":
 		chunks= chunk_one(int(sys.argv[2]), int(sys.argv[3]), sys.argv[4], bool(int(sys.argv[5])), bool(int(sys.argv[6])))
-		# for first 10 chunks print 10 first sentences and length of the chunk		
-		#for i in range(10):
-			#print len(chunks[i])
-			#print chunks[i][:10]
+	
+	# EXAMPLE: python chunker.py test
 	elif sys.argv[1] == "test":
 		for size in range(950,1060,10):
 			for tokenizer in ["split","nltk_nop","nltk","bllip_nop","bllip"]:
@@ -168,6 +153,8 @@ if __name__ == "__main__":
 							chunk_all(size,tokenizer,no_par_breaks,rst)
 						except:
 							print("Failed on: %d %s %r %r.\n"%(size,tokenizer,no_par_breaks,rst))
+	# EXAMPLE: python chunker.py chapter SIZE TOKENIZER NO_PAR_BREAKS RST
+	# (only for texts 1-8 available)
 	elif sys.argv[1] == "chapter":
 		for fid in range(1,9):
 			n = split_in_chap(fid)
