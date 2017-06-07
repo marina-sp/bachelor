@@ -12,7 +12,7 @@ import codecs
 from doc import Document as D
 from preprocesser import Preprocesser as P
 	
-punct = re.compile("[,\.:;\"\?!\[\]\(\)-\*]+")
+punct = re.compile("[,\.:;\"\?!\[\]\(\)-\*_]+")
 
 def build_paras(text, tokenize_function):
 	# builds paragrahps from a text 
@@ -71,7 +71,7 @@ def chunk(paragraphs, size, no_par_breaks):
 			current_size = unit_size
 
 	# take the last chunk 
-	if (current_size >= 1000)and(current_size >= size):
+	if (current_size >= size)and(current_size >= 1000):
 		chunks.append(current_chunk)
 	return chunks
 
@@ -103,8 +103,8 @@ def chunk_all(size, tokenizer, no_par_breaks, rst, print_long = False):
 	chunks_for_file = []
 	chunks_for_file_original = [78,183,383,377,203,167,92,126,156,103,164,261,127,183,173,140,106,68,67]
 	chunks_for_file_exp = [62,165,343,340,173,158,81,109,138,94,148,196,112,146,149,114,93,60,62]
-	
-	for i in range(1,20):
+
+	for i in range(1,20):	
 		chunks = chunk_one(i, size, tokenizer, no_par_breaks, rst)
 		chunks_for_file.append(len(chunks))
 
@@ -118,8 +118,8 @@ def chunk_all(size, tokenizer, no_par_breaks, rst, print_long = False):
 	if print_long:
 		for f in chunks_for_file:
 			print(f)
-	if (avg < 8.0) or (avg < 8.0) or (print_long):
-		print("Chunk size: %d. Tokenizer: %s. No para breaks: %r. RST parser: %r. \nAverage deviation from new dateset: %.2f.\nAverage deviation from old dataset: %.2f.\n"%(size, tokenizer, no_par_breaks, rst, avg, avg1))
+	if (avg < 6.0) or (avg < 6.0) or (print_long):
+		print("Chunk size: %d. Tokenizer: %s. No para breaks: %r. RST parser: %r. Chapters: false. \nAverage deviation from new dateset: %.2f.\nAverage deviation from old dataset: %.2f.\n"%(size, tokenizer, no_par_breaks, rst, avg, avg1))
 	return
 
 
@@ -131,6 +131,45 @@ def split_in_chap(fileid):
 		out = open("../../data/id_texts/ascii_texts/chapters/%02d/%02d_CH%02d.txt"%(fileid,fileid,i),"w")
 		out.write(chap)
 	return len(chaps)
+
+
+def chunk_chaps_of_file(fid, size, tokenizer, no_par_breaks, rst):
+	chaps_for_file = [27,56,69,65,60,39,26,35,35,37,35,151,63,56,49,51,22,19]
+	n = chaps_for_file[fid-1]
+	sum_all = 0
+	for chapid in range(n):
+		chunks = chunk_one(chapid, size, tokenizer, no_par_breaks, rst, "../../data/id_texts/ascii_texts/chapters/%02d/%02d_CH"%(fid,fid))
+		sum_all += len(chunks)
+		#print("File %d chapter %d: %d"%(fid, chapid, len(chunks)))
+		#if chapid == 4:
+			#print(chunks[0])
+	#print("File %d: %d"%(fid, sum_all))
+	return sum_all
+
+def chunk_all_in_chaps(size, tokenizer, no_par_breaks, rst, print_long = False):
+	
+	chunks_for_file = []
+	chunks_for_file_original = [78,183,383,377,203,167,92,126,156,103,164,261,127,183,173,140,106,68]
+	chunks_for_file_exp = [62,165,343,340,173,158,81,109,138,94,148,196,112,146,149,114,93,60]
+
+	for i in range(1,19):	
+		n_chunks = chunk_chaps_of_file(i, size, tokenizer, no_par_breaks, rst)
+		chunks_for_file.append(n_chunks)
+
+	avg = 0
+	avg1 = 0
+	for v1,v2,v3 in zip(chunks_for_file,chunks_for_file_exp,chunks_for_file_original):
+		avg += abs(v1-v2)
+		avg1 += abs(v1-v3)
+	avg = avg * 1.0 / len(chunks_for_file)
+	avg1 = avg1 * 1.0/ len(chunks_for_file)
+	if print_long:
+		for f in chunks_for_file:
+			print(f)
+	if (avg < 15.0) or (avg < 15.0) or (print_long):
+		print("Chunk size: %d. Tokenizer: %s. No para breaks: %r. RST parser: %r. Chapters: True. \nAverage deviation from new dateset: %.2f.\nAverage deviation from old dataset: %.2f.\n"%(size, tokenizer, no_par_breaks, rst, avg, avg1))
+	return
+
 
 
 if __name__ == "__main__":
@@ -145,17 +184,18 @@ if __name__ == "__main__":
 	
 	# EXAMPLE: python chunker.py test
 	elif sys.argv[1] == "test":
-		for size in range(950,1060,10):
+		for size in range(1050,1150,10):	
+			print("Size %d"%size)
 			for tokenizer in ["split","nltk_nop","nltk","bllip_nop","bllip"]:
-				for no_par_breaks in [True,False]:
+				for no_par_breaks in [True]:
 					for rst in [True,False]:
 						try:
 							chunk_all(size,tokenizer,no_par_breaks,rst)
 						except:
 							print("Failed on: %d %s %r %r.\n"%(size,tokenizer,no_par_breaks,rst))
-	# EXAMPLE: python chunker.py chapter SIZE TOKENIZER NO_PAR_BREAKS RST
-	# (only for texts 1-8 available)
-	elif sys.argv[1] == "chapter":
+	# EXAMPLE: python chunker.py chaps SIZE TOKENIZER NO_PAR_BREAKS RST
+	# (only for texts 1-18 available)
+	elif sys.argv[1] == "chaps":
 		for fid in range(1,9):
 			n = split_in_chap(fid)
 			sum_all = 0
@@ -164,3 +204,25 @@ if __name__ == "__main__":
 				sum_all += len(chunks)
 				#print("File %d chapter %d: %d"%(fid, chapid, len(chunks)))
 			print("File %d: %d"%(fid, sum_all))
+	# EXAMPLE: python chunker.py chap 1 SIZE TOKENIZER NO_PAR_BREAKS RST
+	# (only for texts 1-18 available)
+	elif sys.argv[1] == "chap":
+		fid = int(sys.argv[2])	
+		chunk_chaps_of_file(chapid, int(sys.argv[3]), sys.argv[4], bool(int(sys.argv[5])), bool(int(sys.argv[6])))
+
+	# EXAMPLE: python chunker.py all_chap SIZE TOKENIZER NO_PAR_BREAKS RST
+	elif sys.argv[1] == "all_chap":
+		chunk_all_in_chaps(int(sys.argv[2]), sys.argv[3], bool(int(sys.argv[4])), bool(int(sys.argv[5])), True)
+
+	# EXAMPLE: python chunker.py test_chap
+	elif sys.argv[1] == "test_chap":
+		for size in range(1040, 1110,10):		
+			print("Size %d"%size)
+			for tokenizer in ["split","nltk_nop","nltk","bllip_nop","bllip"]:
+				for no_par_breaks in [True]:
+					for rst in [True,False]:
+						try:
+							chunk_all_in_chaps(size,tokenizer,no_par_breaks,rst)
+						except:
+							print("Failed on: %d %s %r %r.\n"%(size,tokenizer,no_par_breaks,rst))
+		

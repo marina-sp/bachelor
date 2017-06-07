@@ -1,0 +1,167 @@
+Chunk size: 1000. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 14.33.
+Average deviation from old dataset: 22.72.
+
+Chunk size: 1000. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 14.67.
+Average deviation from old dataset: 22.28.
+
+Chunk size: 1010. Tokenizer: nltk. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 14.33.
+Average deviation from old dataset: 23.72.
+
+Chunk size: 1010. Tokenizer: nltk. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 14.56.
+Average deviation from old dataset: 23.06.
+
+Chunk size: 1010. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 14.00.
+Average deviation from old dataset: 23.50.
+
+Chunk size: 1010. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 14.28.
+Average deviation from old dataset: 23.00.
+
+Chunk size: 1020. Tokenizer: nltk. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 13.67.
+Average deviation from old dataset: 24.50.
+
+Chunk size: 1020. Tokenizer: nltk. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 14.06.
+Average deviation from old dataset: 23.56.
+
+Chunk size: 1020. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 13.28.
+Average deviation from old dataset: 24.89.
+
+Chunk size: 1020. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 13.50.
+Average deviation from old dataset: 24.11.
+
+Chunk size: 1030. Tokenizer: nltk. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.94.
+Average deviation from old dataset: 25.67.
+
+Chunk size: 1030. Tokenizer: nltk. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 13.17.
+Average deviation from old dataset: 24.89.
+
+Chunk size: 1030. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 13.00.
+Average deviation from old dataset: 25.83.
+
+Chunk size: 1030. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 13.17.
+Average deviation from old dataset: 25.11.
+
+Chunk size: 1040. Tokenizer: nltk. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.39.
+Average deviation from old dataset: 26.44.
+
+Chunk size: 1040. Tokenizer: nltk. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 12.56.
+Average deviation from old dataset: 25.94.
+
+Chunk size: 1040. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.61.
+Average deviation from old dataset: 26.67.
+
+Chunk size: 1040. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 12.78.
+Average deviation from old dataset: 26.06.
+
+Chunk size: 1050. Tokenizer: nltk. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.39.
+Average deviation from old dataset: 27.78.
+
+Chunk size: 1050. Tokenizer: nltk. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 12.33.
+Average deviation from old dataset: 27.39.
+
+Chunk size: 1050. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.28.
+Average deviation from old dataset: 27.67.
+
+Chunk size: 1050. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 12.39.
+Average deviation from old dataset: 27.33.
+
+Chunk size: 1060. Tokenizer: nltk. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.67.
+Average deviation from old dataset: 29.28.
+
+Chunk size: 1060. Tokenizer: nltk. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 12.44.
+Average deviation from old dataset: 28.83.
+
+Chunk size: 1060. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.00.
+Average deviation from old dataset: 29.39.
+
+Chunk size: 1060. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 11.89.
+Average deviation from old dataset: 28.83.
+
+Chunk size: 1070. Tokenizer: nltk. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.33.
+Average deviation from old dataset: 30.83.
+
+Chunk size: 1070. Tokenizer: nltk. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 12.22.
+Average deviation from old dataset: 30.50.
+
+Chunk size: 1070. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.06.
+Average deviation from old dataset: 30.56.
+
+Chunk size: 1070. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 11.89.
+Average deviation from old dataset: 30.06.
+
+Chunk size: 1080. Tokenizer: nltk. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.50.
+Average deviation from old dataset: 32.11.
+
+Chunk size: 1080. Tokenizer: nltk. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 12.33.
+Average deviation from old dataset: 31.72.
+
+Chunk size: 1080. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.56.
+Average deviation from old dataset: 31.50.
+
+Chunk size: 1080. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 12.28.
+Average deviation from old dataset: 31.00.
+
+Chunk size: 1090. Tokenizer: nltk. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 12.78.
+Average deviation from old dataset: 33.17.
+
+Chunk size: 1090. Tokenizer: nltk. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 12.50.
+Average deviation from old dataset: 32.67.
+
+Chunk size: 1090. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 13.44.
+Average deviation from old dataset: 32.94.
+
+Chunk size: 1090. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 13.17.
+Average deviation from old dataset: 32.56.
+
+Chunk size: 1100. Tokenizer: nltk. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 13.17.
+Average deviation from old dataset: 33.89.
+
+Chunk size: 1100. Tokenizer: nltk. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 12.78.
+Average deviation from old dataset: 33.50.
+
+Chunk size: 1100. Tokenizer: bllip. No para breaks: True. RST parser: True. Chapters: True. 
+Average deviation from new dateset: 13.50.
+Average deviation from old dataset: 33.89.
+
+Chunk size: 1100. Tokenizer: bllip. No para breaks: True. RST parser: False. Chapters: True. 
+Average deviation from new dateset: 13.17.
+Average deviation from old dataset: 33.33.
